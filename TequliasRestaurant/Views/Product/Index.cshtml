@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Tequlias Menu Items";
+}
+
+<div>
+    <h2>Tequlias Menu Items</h2>
+    <a asp-action="AddEdit" asp-controller="Product" class="btn btn-primary">Create New Item</a>
+
+    <div class="row">
+    @foreach(Product product in Model)
+        {
+            <div class="col-md-4">
+                 <form asp-action="delete" asp-controller="product" method="post">
+                    <input type="hidden" name="id" value="@product.ProductId" />
+                    <div class="card" style="width:18rem;">
+                        <img src="@Url.Content("~/images/" + product?.ImageUrl)"
+                             class="card-img-top fixed-image-height"
+                             alt="@product.Name" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">Price: @product.Price$</p>
+                        <p class="card-text">Quantity In Stock: @product.Stock</p>
+                        <p class="card-text">Category: @product.Category</p>
+                        
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
